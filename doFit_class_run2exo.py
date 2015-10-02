@@ -383,6 +383,7 @@ class doFit_wj_and_wlvj:
          self.file_datacard_unbin_vbfH       = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
          self.file_datacard_counting_RSGravitonvbfH = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
          self.file_datacard_counting_RSGraviton     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_unbin_Signal     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
          self.file_datacard_counting_vbfH    = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
             
         self.file_out = open(self.file_rlt_txt,"w");
@@ -1760,7 +1761,7 @@ class doFit_wj_and_wlvj:
           getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_WW_EWK_signal_region%s_%s_mlvj"%(self.mlvj_shape["WW_EWK"],self.channel)).clone("WW_EWK_%s"%(self.channel)));         
 
         ### signal shape
-        #getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
+        getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
  #       getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone("qqH_%s"%(self.channel)))
 
         ##create "fake data" for the limit
@@ -2059,10 +2060,10 @@ class doFit_wj_and_wlvj:
 
         ### print the datacard                                       
 #        self.print_limit_datacard("unbin", "RSGravitonvbfH",params_list);
-        self.print_limit_datacard("unbin", "RSGraviton",params_list);
+        self.print_limit_datacard("unbin", "Signal",params_list);
 
         if mode == "sideband_correction_method1":
-
+          print "HERE" 
           if self.MODEL_4_mlvj == "ErfExp_v1" or self.MODEL_4_mlvj == "ErfPow_v1" or self.MODEL_4_mlvj == "2Exp" :
 
                 self.FloatingParams.add(self.workspace4limit_.var("Deco_WJets0_sb_lo%s_from_fitting_%s_%s_mlvj_eig0"%(self.mlvj_shape["WJets0"],self.channel,self.wtagger_label)) );
@@ -2205,6 +2206,8 @@ class doFit_wj_and_wlvj:
          if signalchannel == "RSGraviton" or signalchannel == "vbfH":
             datacard_out.write( "\njmax *" )
          elif signalchannel=="RSGravitonvbfH":
+            datacard_out.write( "\njmax *" )
+         elif signalchannel=="Signal":
             datacard_out.write( "\njmax *" )
          else:
             raw_input("Wrong signal channel, please check!!");
@@ -2812,28 +2815,6 @@ self.channel));
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
 
         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%s"%(self.higgs_sample),"_signal_region",self.mlvj_shape["RSGraviton"],self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
-
-        '''
-        self.get_mj_and_mlvj_dataset(self.file_vbfH,"_%s"%(self.vbfhiggs_sample));
-
-        if not options.skipJetSystematics:
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_jes_up"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_jes_dn"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_jer"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_jer_up"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_jer_dn"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_int_up"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%smassvbf_int_dn"%(self.vbfhiggs_sample),"_signal_region","SCB_Exp_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));      
- 
-        fit_mlvj_model_single_MC(self.workspace4fit_,self.file_vbfH,"_%s"%(self.vbfhiggs_sample),"_signal_region",self.mlvj_shape["vbfH"],self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.vbfhiggs_sample));
-        '''
         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
             
         print "________________________________________________________________________"
@@ -3244,8 +3225,8 @@ self.channel));
 
       ### Fix the pdf of signal, TTbar, STop and VV in the signal region
       
-      #Ivan comment the line: fix_Model(self.workspace4fit_,"_%s"%(self.higgs_sample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
-#      fix_Model(self.workspace4fit_,"_%s"%(self.vbfhiggs_sample),"_signal_region","_mlvj",self.mlvj_shape["vbfH"],self.channel,"",0);
+      #Ivan comment the line: 
+      fix_Model(self.workspace4fit_,"_%s"%(self.higgs_sample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_TTbar","_signal_region","_mlvj",self.mlvj_shape["TTbar"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_STop","_signal_region","_mlvj",self.mlvj_shape["STop"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_VV","_signal_region","_mlvj",self.mlvj_shape["VV"],self.channel,"",0);
@@ -3253,9 +3234,7 @@ self.channel));
       self.workspace4fit_.writeToFile(self.tmpFile.GetName());
 
       ### Call the evaluation of the normalization in the signal region for signal, TTbar, VV, STop, and WJets after the extrapolation via alpha
-      #Ivan comment the line: 
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.higgs_sample),self.mlvj_shape["RSGraviton"],"_signal_region",self.channel);
-#      get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.vbfhiggs_sample),self.mlvj_shape["vbfH"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_TTbar",self.mlvj_shape["TTbar"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_STop",self.mlvj_shape["STop"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_VV",self.mlvj_shape["VV"],"_signal_region",self.channel);
