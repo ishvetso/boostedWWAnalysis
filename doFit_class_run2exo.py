@@ -186,7 +186,7 @@ class doFit_wj_and_wlvj:
         self.workspace4limit_ = RooWorkspace("workspace4limit_","workspace4limit_");
 
         ## different code operation mode -> just normal analysis
-	if options.closuretest == 0:
+        if options.closuretest == 0:
             self.mj_sideband_lo_min = in_mj_min;
             self.mj_sideband_lo_max = 60;
             self.mj_signal_min = 60;
@@ -229,33 +229,13 @@ class doFit_wj_and_wlvj:
         else:
             self.file_data  = ("WWTree_data.root");
 
-        self.file_ggH   = ("WWTree_%s.root"%(self.higgs_sample));
-#        self.file_vbfH  = ("WWTree_%s.root"%(self.vbfhiggs_sample));
-
-        #WJets0 is the default PS model, WJets1 is the alternative PS model
-        '''
-        if self.PS_model == "pythia":
-            if options.jetBin == "_2jet" :
-             self.file_WJets0_mc = ("WWTree_WJets_exclusive_Pythia.root");
-             self.file_WJets1_mc = ("WWTree_WJets_Herwig.root");
-            else: 
-             self.file_WJets1_mc = ("WWTree_WJets_Pythia100.root");
-             self.file_WJets0_mc = ("WWTree_WJets_Herwig.root");
-        else:
-            if options.jetBin == "_2jet" :
-             self.file_WJets0_mc = ("WWTree_WJets_Herwig.root");
-             self.file_WJets1_mc = ("WWTree_WJets_exclusive_Pythia.root");
-            else:
-             self.file_WJets0_mc = ("WWTree_WJets_Herwig.root");
-             self.file_WJets1_mc = ("WWTree_WJets_Pythia100.root");
-        '''
-
         self.file_WJets0_mc = ("WWTree_WJets.root");
                 
         self.file_VV_mc     = ("WWTree_VV.root");# WW+WZ
 #        self.file_WW_EWK_mc = ("WWTree_WW2jet_phantom.root");# WW_EWK       
         self.file_STop_mc   = ("WWTree_STop.root");#STop
         self.file_TTbar_mc  = ("WWTree_TTbar.root");
+        self.file_ggH  = ("WWTree_Signal.root"); # Ivan added the line
 #        self.file_TTbar_matchDn_mc = ("WWTree_TTbar_matchDn.root");
 #        self.file_TTbar_matchUp_mc = ("WWTree_TTbar_matchUp.root");
 #        self.file_TTbar_scaleDn_mc = ("WWTree_TTbar_scaleDn.root");
@@ -283,99 +263,99 @@ class doFit_wj_and_wlvj:
             self.wtagger_cut=10000;
 
         #medium wtagger_eff reweight between data and mc #Wtagger_forV SF have be add to ntuple weight;
-	if self.channel=="mu" and self.wtagger_label=="HP":
-          if options.pseudodata == 1:
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and  options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.128);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.338);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and not options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+        if self.channel=="mu" and self.wtagger_label=="HP":
+              if options.pseudodata == 1:
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and  options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.128);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.338);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and not options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
                                                                                                                           
         if self.channel=="el" and self.wtagger_label=="HP":
-          if options.pseudodata == 1:
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.08);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.369);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and not  options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.89);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.87);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-                                                  
+              if options.pseudodata == 1:
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.08);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.369);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and not  options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.89);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.87);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+                                                      
         if self.channel=="em" and self.wtagger_label=="HP":
-          if options.pseudodata == 1:
-            self.rrv_wtagger_eff_reweight_forT=RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.0);
-            self.rrv_wtagger_eff_reweight_forT.setError(0.265);
-            self.rrv_wtagger_eff_reweight_forV=RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.0);
-            self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata ==0 and options.jetBin == "_2jet":
-            self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.);
-            self.rrv_wtagger_eff_reweight_forT.setError(0.265);
-            self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-            self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());              
+              if options.pseudodata == 1:
+                self.rrv_wtagger_eff_reweight_forT=RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.0);
+                self.rrv_wtagger_eff_reweight_forT.setError(0.265);
+                self.rrv_wtagger_eff_reweight_forV=RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.0);
+                self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata ==0 and options.jetBin == "_2jet":
+                self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.);
+                self.rrv_wtagger_eff_reweight_forT.setError(0.265);
+                self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+                self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());              
 
 
-        #medium wtagger_eff reweight between data and mc #Wtagger_forV SF have be add to ntuple weight;
-	if self.channel=="mu" and self.wtagger_label=="LP":
-          if options.pseudodata == 1:
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and  options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.128);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.338);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and not options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+            #medium wtagger_eff reweight between data and mc #Wtagger_forV SF have be add to ntuple weight;
+        if self.channel=="mu" and self.wtagger_label=="LP":
+              if options.pseudodata == 1:
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and  options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.128);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.338);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and not options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
                                                                                                                           
         if self.channel=="el" and self.wtagger_label=="LP":
-          if options.pseudodata == 1:
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.08);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.369);
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata == 0 and not  options.jetBin == "_2jet":
-           self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.89);
-           self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
-           self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.87);
-           self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              if options.pseudodata == 1:
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",1.);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.08);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.96);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.369);
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata == 0 and not  options.jetBin == "_2jet":
+               self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT",0.89);
+               self.rrv_wtagger_eff_reweight_forT.setError(0.06*self.rrv_wtagger_eff_reweight_forT.getVal());
+               self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.87);
+               self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
                                                   
         if self.channel=="em" and self.wtagger_label=="LP":
-          if options.pseudodata == 1:
-            self.rrv_wtagger_eff_reweight_forT=RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.0);
-            self.rrv_wtagger_eff_reweight_forT.setError(0.265);
-            self.rrv_wtagger_eff_reweight_forV=RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.0);
-            self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
-          elif options.pseudodata ==0 and options.jetBin == "_2jet":
-            self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.);
-            self.rrv_wtagger_eff_reweight_forT.setError(0.265);
-            self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
-            self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());              
+              if options.pseudodata == 1:
+                self.rrv_wtagger_eff_reweight_forT=RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.0);
+                self.rrv_wtagger_eff_reweight_forT.setError(0.265);
+                self.rrv_wtagger_eff_reweight_forV=RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",1.0);
+                self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());
+              elif options.pseudodata ==0 and options.jetBin == "_2jet":
+                self.rrv_wtagger_eff_reweight_forT = RooRealVar("rrv_wtagger_eff_reweight_forT","rrv_wtagger_eff_reweight_forT", 1.);
+                self.rrv_wtagger_eff_reweight_forT.setError(0.265);
+                self.rrv_wtagger_eff_reweight_forV = RooRealVar("rrv_wtagger_eff_reweight_forV","rrv_wtagger_eff_reweight_forV",0.93);
+                self.rrv_wtagger_eff_reweight_forV.setError(0.097*self.rrv_wtagger_eff_reweight_forV.getVal());              
 
 
         print "wtagger efficiency correction for Top sample: %s +/- %s"%(self.rrv_wtagger_eff_reweight_forT.getVal(), self.rrv_wtagger_eff_reweight_forT.getError());
@@ -431,7 +411,7 @@ class doFit_wj_and_wlvj:
 #        if self.channel=="el":
 #            self.Lumi = 19166;
 
-	#met cut:el 70; mu: 50
+    #met cut:el 70; mu: 50
         self.pfMET_cut = 40;
         self.lpt_cut   = 50;
         self.vpt_cut   = 200;
@@ -650,19 +630,7 @@ class doFit_wj_and_wlvj:
 #        rrv_WJets0.setError(total_uncertainty);
         rrv_WJets0.Print();
 #        print "Total Uncertainty in WJtes0 due to fit and shape: uncertainty ",total_uncertainty/rrv_WJets0.getVal();
-        '''
-        #uncertainty due to the VBF interference
-        rrv_vbf                = self.workspace4fit_.var("rrv_number_dataset_signal_region_%s_%s_mj"%(self.vbfhiggs_sample,self.channel))
-        rrv_vbfmassvbf_int_up  = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_int_up_%s_mj"%(self.vbfhiggs_sample,self.channel))
-        rrv_vbfmassvbf_int_dn  = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_int_dn_%s_mj"%(self.vbfhiggs_sample,self.channel)) 
 
-        rrv_vbf.Print();
-        rrv_vbfmassvbf_int_up.Print();
-        rrv_vbfmassvbf_int_dn.Print();      
-
-        self.interference_vbfH_uncertainty = ((TMath.Abs(rrv_vbfmassvbf_int_up.getVal()-rrv_vbf.getVal())+TMath.Abs(rrv_vbfmassvbf_int_dn.getVal()-rrv_vbf.getVal() ) )/2.)/rrv_vbf.getVal();         
-        print "Total Uncertainty on vbfH due to interference: uncertainty ",self.interference_vbfH_uncertainty;
-        '''
         if scaleJetMass :
 
          fit_WJetsNormalization_in_Mj_signal_region(self.workspace4fit_,self.color_palet,self.mj_shape,"_WJets0massvbf_jes_up","massvbf_jes_up",self.mj_shape["WJets0"],self.channel,self.wtagger_label,0,options.pseudodata,self.mj_signal_min,self.mj_signal_max,options.jetBin); ## fit jet mass distribution
@@ -842,12 +810,13 @@ class doFit_wj_and_wlvj:
 
 
     ##### Method used to cycle on the events and for the dataset to be fitted
-    def get_mj_and_mlvj_dataset(self,in_file_name, label, jet_mass="jet_mass_pr"):# to get the shape of m_lvj
+    def get_mj_and_mlvj_dataset(self,in_file_name, label, jet_mass="jet_mass_pruned"):# to get the shape of m_lvj
 
+        print "Label:", label
         # read in tree
         fileIn_name = TString(self.file_Directory+in_file_name);
         fileIn = TFile(fileIn_name.Data());
-        treeIn = fileIn.Get("otree");
+        treeIn = fileIn.Get("BasicTree");
 
         rrv_mass_j      = self.workspace4fit_.var("rrv_mass_j") 
         rrv_mass_lvj    = self.workspace4fit_.var("rrv_mass_lvj")
@@ -983,7 +952,7 @@ class doFit_wj_and_wlvj:
          combData_jer = RooDataSet("combData"+label+"massvbf_jer"+"_"+self.channel,"combData"+label+"massvbf_jer"+"_"+self.channel,RooArgSet(rrv_mass_lvj, data_category, rrv_weight),RooFit.WeightVar(rrv_weight) );
          combData4fit_jer = RooDataSet("combData4fit"+label+"massvbf_jer"+"_"+self.channel,"combData4fit"+label+"massvbf_jer"+"_"+self.channel,RooArgSet(rrv_mass_lvj, data_category, rrv_weight),RooFit.WeightVar(rrv_weight) );
 
-        print "N entries: ", treeIn.GetEntries();
+        #print "N entries: ", treeIn.GetEntries();
 
         hnum_4region = TH1D("hnum_4region"+label+"_"+self.channel,"hnum_4region"+label+"_"+self.channel,4,-1.5,2.5);# m_j   -1: sb_lo; 0:signal_region; 1: sb_hi; 2:total        
         hnum_2region = TH1D("hnum_2region"+label+"_"+self.channel,"hnum_2region"+label+"_"+self.channel,2,-0.5,1.5);# m_lvj  0: signal_region; 1: total
@@ -1031,7 +1000,7 @@ class doFit_wj_and_wlvj:
           else:
             discriminantCut = False;
         
-          tmp_scale_to_lumi = treeIn.wSampleWeight;
+          tmp_scale_to_lumi = treeIn.weight;
                                 
           jet_1 = ROOT.TLorentzVector();
           jet_2 = ROOT.TLorentzVector();
@@ -1045,12 +1014,13 @@ class doFit_wj_and_wlvj:
 
           # jet mass , central value
           tmp_jet_mass = getattr(treeIn, jet_mass);
-          tmp_vbf_dEta = math.fabs(getattr(treeIn, "vbf_maxpt_j1_eta")-getattr(treeIn,"vbf_maxpt_j2_eta"));
-          tmp_vbf_Mjj  = getattr(treeIn, "vbf_maxpt_jj_m");
+         # tmp_vbf_dEta = math.fabs(getattr(treeIn, "vbf_maxpt_j1_eta")-getattr(treeIn,"vbf_maxpt_j2_eta"));
+          #tmp_vbf_Mjj  = getattr(treeIn, "vbf_maxpt_jj_m");
           njet         = getattr(treeIn,"njets");
-          ungroomed_jet_pt = getattr(treeIn,"ungroomed_jet_pt");
+          ungroomed_jet_pt = getattr(treeIn,"jet_pt");
           pfMET    = getattr(treeIn,"pfMET");
-          mass_lvj = getattr(treeIn,"mass_lvj_type2");
+          mass_lvj = getattr(treeIn,"m_lvj");
+         # print "m_lvj ", m_lvj
 
           if label != "_WJets01" and label != "_WJets1" and label !="_data" and not options.skipJetSystematics:
 
@@ -1159,9 +1129,9 @@ class doFit_wj_and_wlvj:
              isPassingCut_jer_dn = 1 ;
 
           else:
-              
-           if ungroomed_jet_pt > 200. and discriminantCut and tmp_jet_mass >= rrv_mass_j.getMin() and tmp_jet_mass<=rrv_mass_j.getMax() and getattr(treeIn,"nBTagJet_medium") < 1 and mass_lvj >= rrv_mass_lvj.getMin() and mass_lvj <=rrv_mass_lvj.getMax() and getattr(treeIn,"v_pt") > self.vpt_cut and pfMET > self.pfMET_cut and getattr(treeIn,"l_pt") > self.lpt_cut and getattr(treeIn,"issignal")==1:# and getattr(treeIn,"mass_ungroomedjet_closerjet") > self.top_veto_had and getattr(treeIn,"mass_leptonic_closerjet") > self.top_veto_lep:# and njet < 2:
-               
+                
+           if ungroomed_jet_pt > 200. and discriminantCut and tmp_jet_mass >= rrv_mass_j.getMin() and tmp_jet_mass<=rrv_mass_j.getMax() and getattr(treeIn,"nbtag") < 1 and mass_lvj >= rrv_mass_lvj.getMin() and mass_lvj <=rrv_mass_lvj.getMax() and getattr(treeIn,"W_pt") > self.vpt_cut and pfMET > self.pfMET_cut and getattr(treeIn,"l_pt") > self.lpt_cut:# and getattr(treeIn,"issignal")==1:# and getattr(treeIn,"mass_ungroomedjet_closerjet") > self.top_veto_had and getattr(treeIn,"mass_leptonic_closerjet") > self.top_veto_lep:# and njet < 2:
+            
             isPassingCut = 1 ;
 
            if label != "_WJets01" and label != "_WJets1" and label !="_data" and not options.skipJetSystematics:
@@ -1189,199 +1159,16 @@ class doFit_wj_and_wlvj:
 #             tmp_event_weight4fit = getattr(treeIn,"eff_and_pu_Weight");
              
              if options.pseudodata==1: 
-                 tmp_event_weight = getattr(treeIn,"wSampleWeight")*self.Lumi;
+                 #tmp_event_weight = getattr(treeIn,"weight")*self.Lumi;
+                 tmp_event_weight = getattr(treeIn,"weight");
              else:    
-                 tmp_event_weight = getattr(treeIn,"wSampleWeight");
-             tmp_event_weight4fit = getattr(treeIn,"eff_and_pu_Weight");
-
-             '''
-             tmp_interference_weight_H600 = getattr(treeIn,"interference_Weight_H600");
-             tmp_interference_weight_H700 = getattr(treeIn,"interference_Weight_H700");
-             tmp_interference_weight_H800 = getattr(treeIn,"interference_Weight_H800");
-             tmp_interference_weight_H900 = getattr(treeIn,"interference_Weight_H900");
-             tmp_interference_weight_H1000 = getattr(treeIn,"interference_Weight_H1000");
-
-             if TString(label).Contains("ggH") or TString(label).Contains("vbfH"):
-              tmp_interference_weight_H600_up= getattr(treeIn,"interference_Weight_H600_up");
-              tmp_interference_weight_H700_up= getattr(treeIn,"interference_Weight_H700_up");
-              tmp_interference_weight_H800_up= getattr(treeIn,"interference_Weight_H800_up");
-              tmp_interference_weight_H900_up= getattr(treeIn,"interference_Weight_H900_up");
-              tmp_interference_weight_H1000_up= getattr(treeIn,"interference_Weight_H1000_up");
-
-              tmp_interference_weight_H600_dn= getattr(treeIn,"interference_Weight_H600_dn");
-              tmp_interference_weight_H700_dn= getattr(treeIn,"interference_Weight_H700_dn");
-              tmp_interference_weight_H800_dn= getattr(treeIn,"interference_Weight_H800_dn");
-              tmp_interference_weight_H900_dn= getattr(treeIn,"interference_Weight_H900_dn");
-              tmp_interference_weight_H1000_dn= getattr(treeIn,"interference_Weight_H1000_dn");
-             
-
-             ## added by Nhan, getting additional BSM weight
-             bsmWeightName = "bsmReweight_cPrime%02d_brNew%02d"%(options.cprime,options.BRnew);
-             bsmWeightNameUp = "bsmReweight_cPrime%02d_brNew%02d_up"%(options.cprime,options.BRnew);
-             bsmWeightNameDn = "bsmReweight_cPrime%02d_brNew%02d_dn"%(options.cprime,options.BRnew);
-             tmp_bsmWeight = getattr(treeIn, bsmWeightName);
-             if tmp_bsmWeight < 0 : tmp_bsmWeight = 1;
-             if TString(label).Contains("_ggH"):
-              tmp_bsmWeightUp = getattr(treeIn, bsmWeightNameUp);
-              tmp_bsmWeightDn = getattr(treeIn, bsmWeightNameDn);
-              if tmp_bsmWeightUp < 0 : tmp_bsmWeightUp = 1;
-              if tmp_bsmWeightDn < 0 : tmp_bsmWeightDn = 1;
-
-             
-             if TString(label).Contains("ggH600"):
-                tmp_event_weightUp = tmp_event_weight*tmp_interference_weight_H600_up
-                tmp_event_weightDn = tmp_event_weight*tmp_interference_weight_H600_dn
-                tmp_event_weight4fitUp = tmp_event_weight4fit*tmp_interference_weight_H600_up
-                tmp_event_weight4fitDn = tmp_event_weight4fit*tmp_interference_weight_H600_dn
-                tmp_event_weight = tmp_event_weight*tmp_interference_weight_H600
-                tmp_event_weight4fit = tmp_event_weight4fit*tmp_interference_weight_H600
-             if TString(label).Contains("ggH700"):
-                tmp_event_weightUp = tmp_event_weight*tmp_interference_weight_H700_up
-                tmp_event_weightDn = tmp_event_weight*tmp_interference_weight_H700_dn
-                tmp_event_weight4fitUp = tmp_event_weight4fit*tmp_interference_weight_H700_up
-                tmp_event_weight4fitDn = tmp_event_weight4fit*tmp_interference_weight_H700_dn
-                tmp_event_weight = tmp_event_weight*tmp_interference_weight_H700
-                tmp_event_weight4fit = tmp_event_weight4fit*tmp_interference_weight_H700
-             if TString(label).Contains("ggH800"):
-                tmp_event_weightUp = tmp_event_weight*tmp_interference_weight_H800_up
-                tmp_event_weightDn = tmp_event_weight*tmp_interference_weight_H800_dn
-                tmp_event_weight4fitUp = tmp_event_weight4fit*tmp_interference_weight_H800_up
-                tmp_event_weight4fitDn = tmp_event_weight4fit*tmp_interference_weight_H800_dn
-                tmp_event_weight = tmp_event_weight*tmp_interference_weight_H800
-                tmp_event_weight4fit = tmp_event_weight4fit*tmp_interference_weight_H800
-             if TString(label).Contains("ggH900"):
-                tmp_event_weightUp = tmp_event_weight*tmp_interference_weight_H900_up
-                tmp_event_weightDn = tmp_event_weight*tmp_interference_weight_H900_dn
-                tmp_event_weight4fitUp = tmp_event_weight4fit*tmp_interference_weight_H900_up
-                tmp_event_weight4fitDn = tmp_event_weight4fit*tmp_interference_weight_H900_dn
-                tmp_event_weight = tmp_event_weight*tmp_interference_weight_H900
-                tmp_event_weight4fit = tmp_event_weight4fit*tmp_interference_weight_H900
-             if TString(label).Contains("ggH1000"):
-                tmp_event_weightUp = tmp_event_weight*tmp_interference_weight_H1000_up
-                tmp_event_weightDn = tmp_event_weight*tmp_interference_weight_H1000_dn
-                tmp_event_weight4fitUp = tmp_event_weight4fit*tmp_interference_weight_H1000_up
-                tmp_event_weight4fitDn = tmp_event_weight4fit*tmp_interference_weight_H1000_dn
-                tmp_event_weight = tmp_event_weight*tmp_interference_weight_H1000
-                tmp_event_weight4fit = tmp_event_weight4fit*tmp_interference_weight_H1000
-
-
-             if options.interferenceModel=="1":
-                 cent="SET1/file_for_interpolation.root";
-                 up="SET1/file_for_interpolation_up.root";
-                 dn="SET1/file_for_interpolation_dn.root";
-             elif options.interferenceModel=="2":
-                 cent="SET2/file_for_interpolation.root";
-                 up="SET2/file_for_interpolation_up.root";
-                 dn="SET2/file_for_interpolation_dn.root";
-             else:
-                 cent="SET3/file_for_interpolation.root";
-                 up="SET3/file_for_interpolation_up.root";
-                 dn="SET3/file_for_interpolation_dn.root";                 
-   
-             if TString(label).Contains("vbfH600"):
-                intWeight=getIntWght(cent, 600, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightUp=getIntWght(up, 600, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightDn=getIntWght(dn, 600, mass_WW_gen, options.cprime/10., options.BRnew/10.)           
-
-                tmp_event_weight = tmp_event_weight*treeIn.cps_Weight_H600*intWeight;
-                tmp_event_weight4fit = tmp_event_weight4fit*treeIn.cps_Weight_H600*intWeight;
-                tmp_event_weightUp = tmp_event_weight*treeIn.cps_Weight_H600*intWeightUp;
-                tmp_event_weight4fitUp = tmp_event_weight4fit*treeIn.cps_Weight_H600*intWeightUp;
-                tmp_event_weightDn = tmp_event_weight*treeIn.cps_Weight_H600*intWeightDn;
-                tmp_event_weight4fitDn = tmp_event_weight4fit*treeIn.cps_Weight_H600*intWeightDn;                                
-
-             if TString(label).Contains("vbfH700"):
-                intWeight=getIntWght(cent, 700, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightUp=getIntWght(up, 700, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightDn=getIntWght(dn, 700, mass_WW_gen, options.cprime/10., options.BRnew/10.)           
-
-                tmp_event_weight = tmp_event_weight*treeIn.cps_Weight_H700*intWeight;
-                tmp_event_weight4fit = tmp_event_weight4fit*treeIn.cps_Weight_H700*intWeight;
-                tmp_event_weightUp = tmp_event_weight*treeIn.cps_Weight_H700*intWeightUp;
-                tmp_event_weight4fitUp = tmp_event_weight4fit*treeIn.cps_Weight_H700*intWeightUp;
-                tmp_event_weightDn = tmp_event_weight*treeIn.cps_Weight_H700*intWeightDn;
-                tmp_event_weight4fitDn = tmp_event_weight4fit*treeIn.cps_Weight_H700*intWeightDn;                                
-
-
-             if TString(label).Contains("vbfH800"):
-                intWeight=getIntWght(cent, 800, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightUp=getIntWght(up, 800, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightDn=getIntWght(dn, 800, mass_WW_gen, options.cprime/10., options.BRnew/10.)           
-
-                tmp_event_weight = tmp_event_weight*treeIn.cps_Weight_H800*intWeight;
-                tmp_event_weight4fit = tmp_event_weight4fit*treeIn.cps_Weight_H800*intWeight;
-                tmp_event_weightUp = tmp_event_weight*treeIn.cps_Weight_H800*intWeightUp;
-                tmp_event_weight4fitUp = tmp_event_weight4fit*treeIn.cps_Weight_H800*intWeightUp;
-                tmp_event_weightDn = tmp_event_weight*treeIn.cps_Weight_H800*intWeightDn;
-                tmp_event_weight4fitDn = tmp_event_weight4fit*treeIn.cps_Weight_H800*intWeightDn;                                
-
-             if TString(label).Contains("vbfH900"):
-                intWeight=getIntWght(cent, 900, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightUp=getIntWght(up, 900, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightDn=getIntWght(dn, 900, mass_WW_gen, options.cprime/10., options.BRnew/10.)           
-
-                tmp_event_weight = tmp_event_weight*treeIn.cps_Weight_H900*intWeight;
-                tmp_event_weight4fit = tmp_event_weight4fit*treeIn.cps_Weight_H900*intWeight;
-                tmp_event_weightUp = tmp_event_weight*treeIn.cps_Weight_H900*intWeightUp;
-                tmp_event_weight4fitUp = tmp_event_weight4fit*treeIn.cps_Weight_H900*intWeightUp;
-                tmp_event_weightDn = tmp_event_weight*treeIn.cps_Weight_H900*intWeightDn;
-                tmp_event_weight4fitDn = tmp_event_weight4fit*treeIn.cps_Weight_H900*intWeightDn;                                
-
-
-             if TString(label).Contains("vbfH1000"):
-                intWeight=getIntWght(cent, 1000, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightUp=getIntWght(up, 1000, mass_WW_gen, options.cprime/10., options.BRnew/10.)
-                intWeightDn=getIntWght(dn, 1000, mass_WW_gen, options.cprime/10., options.BRnew/10.)           
-
-                tmp_event_weight = tmp_event_weight*treeIn.cps_Weight_H1000*intWeight;
-                tmp_event_weight4fit = tmp_event_weight4fit*treeIn.cps_Weight_H1000*intWeight;
-                tmp_event_weightUp = tmp_event_weight*treeIn.cps_Weight_H1000*intWeightUp;
-                tmp_event_weight4fitUp = tmp_event_weight4fit*treeIn.cps_Weight_H1000*intWeightUp;
-                tmp_event_weightDn = tmp_event_weight*treeIn.cps_Weight_H1000*intWeightDn;
-                tmp_event_weight4fitDn = tmp_event_weight4fit*treeIn.cps_Weight_H1000*intWeightDn;                                
- 
-             if TString(label).Contains("vbfH"):
-                 if intWeight==-1 or intWeightUp==-1 or intWeightDn==-1:
-                     raw_input("HOUSTON WE'VE GOT A PROBLEM")                     
-             '''   
+                 tmp_event_weight = getattr(treeIn,"weight");
+             tmp_event_weight4fit = getattr(treeIn,"weight");
 
 #             print "#########  #########";
              #for multi-sample, like STop and VV. There are two sample, and two wSampleWeight_value.Use the least wSampleWeight as scale.
-             tmp_event_weight4fit = tmp_event_weight4fit*treeIn.wSampleWeight/tmp_scale_to_lumi;
+             #tmp_event_weight4fit = self.Lumi*tmp_event_weight4fit*treeIn.weight/tmp_scale_to_lumi;
 
-             '''
-             if TString(label).Contains("vbfH"):
-                 
-                 tmp_event_weight4fitUp = tmp_event_weight4fitUp*treeIn.wSampleWeight/tmp_scale_to_lumi;
-                 tmp_event_weight4fitDn = tmp_event_weight4fitDn*treeIn.wSampleWeight/tmp_scale_to_lumi;
-
-                 tmp_event_weight = tmp_event_weight/self.higgs_xs_scale;
-                 tmp_event_weight4fit = tmp_event_weight4fit/self.higgs_xs_scale;                 
-                 tmp_event_weightUp = tmp_event_weightUp/self.higgs_xs_scale;
-                 tmp_event_weight4fitUp = tmp_event_weight4fitUp/self.higgs_xs_scale;
-                 tmp_event_weightDn = tmp_event_weightDn/self.higgs_xs_scale;
-                 tmp_event_weight4fitDn = tmp_event_weight4fitDn/self.higgs_xs_scale; 
-
-             if TString(label).Contains("RSGraviton"):
-
-                 tmp_event_weight4fitUp = tmp_event_weight4fitUp*treeIn.wSampleWeight/tmp_scale_to_lumi;
-                 tmp_event_weight4fitDn = tmp_event_weight4fitDn*treeIn.wSampleWeight/tmp_scale_to_lumi;
-
-                 tmp_event_weight = tmp_event_weight/self.higgs_xs_scale;
-                 tmp_event_weight4fit = tmp_event_weight4fit/self.higgs_xs_scale;
-                 tmp_event_weightUp = tmp_event_weightUp/self.higgs_xs_scale;
-                 tmp_event_weight4fitUp = tmp_event_weight4fitUp/self.higgs_xs_scale;
-                 tmp_event_weightDn = tmp_event_weightDn/self.higgs_xs_scale;
-                 tmp_event_weight4fitDn = tmp_event_weight4fitDn/self.higgs_xs_scale;
-
-                 ## added by Nhan
-                 tmp_event_weight = tmp_event_weight*tmp_bsmWeight;
-                 tmp_event_weight4fit=tmp_event_weight4fit*tmp_bsmWeight;
-                 tmp_event_weightUp = tmp_event_weightUp*tmp_bsmWeightUp;
-                 tmp_event_weight4fitUp=tmp_event_weight4fitUp*tmp_bsmWeightUp;
-                 tmp_event_weightDn = tmp_event_weightDn*tmp_bsmWeightDn;
-                 tmp_event_weight4fitDn =tmp_event_weight4fitDn*tmp_bsmWeightDn;
-             '''
 #             print "######### #########";
 
              if not label=="_data":
@@ -1392,21 +1179,7 @@ class doFit_wj_and_wlvj:
                          tmp_event_weight     = tmp_event_weight*self.rrv_wtagger_eff_reweight_forV.getVal();
                          tmp_event_weight4fit = tmp_event_weight4fit*self.rrv_wtagger_eff_reweight_forV.getVal();
 
-#                     if TString(label).Contains("vbfH") or TString(label).Contains("_RSGraviton"):    
-#                         tmp_event_weightUp     = tmp_event_weightUp*self.rrv_wtagger_eff_reweight_forV.getVal();
-#                         tmp_event_weight4fitUp = tmp_event_weight4fitUp*self.rrv_wtagger_eff_reweight_forV.getVal();
-#                         tmp_event_weightDn     = tmp_event_weightDn*self.rrv_wtagger_eff_reweight_forV.getVal();
-#                         tmp_event_weight4fitDn = tmp_event_weight4fitDn*self.rrv_wtagger_eff_reweight_forV.getVal();
 
-#             if TString(label).Contains("RSGraviton") or TString(label).Contains("vbfH"):     
-#              tmp_event_weightUp        = tmp_event_weightUp* getattr(treeIn,"btag_weight"); ## add the btag weight 
-#              tmp_event_weight4fitUp    = tmp_event_weight4fitUp* getattr(treeIn,"btag_weight"); ## add the btag weight
-#              tmp_event_weightDn        = tmp_event_weightDn* getattr(treeIn,"btag_weight"); ## add the btag weight 
-#              tmp_event_weight4fitDn    = tmp_event_weight4fitDn* getattr(treeIn,"btag_weight"); ## add the btag
-#              tmp_event_weight          = tmp_event_weight* getattr(treeIn,"btag_weight"); ## add the btag weight 
-#              tmp_event_weight4fit      = tmp_event_weight4fit* getattr(treeIn,"btag_weight"); ## add the btag weight
-
- 
 
              if TString(label).Contains("RSGraviton") or TString(label).Contains("vbfH"):
               rrv_mass_gen_WW.setVal(mass_WW_gen);
@@ -1426,23 +1199,14 @@ class doFit_wj_and_wlvj:
              if tmp_jet_mass >= self.mj_signal_min and tmp_jet_mass < self.mj_signal_max and isPassingCut == 1:
                  rdataset_signal_region_mlvj.add( RooArgSet( rrv_mass_lvj ), tmp_event_weight );
                  rdataset4fit_signal_region_mlvj.add( RooArgSet( rrv_mass_lvj ), tmp_event_weight4fit );
-#                 if TString(label).Contains("vbfH") or TString(label).Contains("RSGraviton") :
-#                     rdataset_signal_region_mlvj_int_up.add( RooArgSet( rrv_mass_lvj ), tmp_event_weightUp );
-#                     rdataset4fit_signal_region_mlvj_int_up.add( RooArgSet( rrv_mass_lvj ), tmp_event_weight4fitUp );
-#                     rdataset_signal_region_mlvj_int_dn.add( RooArgSet( rrv_mass_lvj ), tmp_event_weightDn );
-#                     rdataset4fit_signal_region_mlvj_int_dn.add( RooArgSet( rrv_mass_lvj ), tmp_event_weight4fitDn ); 
                  data_category.setLabel("signal_region");
                  combData.add(RooArgSet(rrv_mass_lvj,data_category),tmp_event_weight);
                  combData4fit.add(RooArgSet(rrv_mass_lvj,data_category),tmp_event_weight4fit);
                  hnum_2region.Fill(1,tmp_event_weight);
-#                 if TString(label).Contains("vbfH") or TString(label).Contains("RSGraviton"):
-#                       hnum_2region_int_up.Fill(1,tmp_event_weightUp);
-#                       hnum_2region_int_dn.Fill(1,tmp_event_weightDn);                 
+#                            
                  if mass_lvj >=self.mlvj_signal_min and mass_lvj <self.mlvj_signal_max: 
                    hnum_2region.Fill(0,tmp_event_weight);
-#                   if TString(label).Contains("vbfH") or TString(label).Contains("RSGraviton"):
-#                       hnum_2region_int_up.Fill(0,tmp_event_weightUp);
-#                       hnum_2region_int_dn.Fill(0,tmp_event_weightDn);
+#                   
 
              if tmp_jet_mass >= self.mj_sideband_hi_min and tmp_jet_mass < self.mj_sideband_hi_max and isPassingCut == 1:
                  rdataset_sb_hi_mlvj.add( RooArgSet( rrv_mass_lvj ), tmp_event_weight );
@@ -1658,6 +1422,7 @@ class doFit_wj_and_wlvj:
                hnum_4region_jer_dn.Fill(2,tmp_event_weight);
 
         ## scale 4fit dataset in order to have the right luminosity normalization
+        print "####Ivan####  ", rdataset4fit_mj.sumEntries()
         rrv_scale_to_lumi = RooRealVar("rrv_scale_to_lumi"+label+"_"+self.channel,"rrv_scale_to_lumi"+label+"_"+self.channel,rdataset_mj.sumEntries()/rdataset4fit_mj.sumEntries());
         rrv_scale_to_lumi.Print();
         rrv_scale_to_lumi_sb_lo = RooRealVar("rrv_scale_to_lumi"+label+"_"+self.channel+"_sb_lo_mlvj","rrv_scale_to_lumi"+label+"_"+self.channel+"_sb_lo_mlvj",0);
@@ -1929,6 +1694,8 @@ class doFit_wj_and_wlvj:
         ### whole number of events from the considered signal sample, WJets, VV, TTbar, STop -> counting experiment  ####
         #################################################################################################################
         
+        #Ivan: comment this block with for counting : 
+        print self.higgs_sample
         getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_%s_%s_mlvj"%(self.higgs_sample,self.channel)).clone("rate_%s_for_counting"%(self.higgs_sample) ) )
 #        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_%s_%s_mlvj"%(self.vbfhiggs_sample,self.channel)).clone("rate_%s_for_counting"%(self.vbfhiggs_sample)))
 
@@ -1942,6 +1709,7 @@ class doFit_wj_and_wlvj:
         ### number of signal, Wjets, VV, TTbar and STop --> unbinned shape analysis  ###
         ################################################################################
         
+        #Ivan comment the line: 
         getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("rate_%s_for_unbin"%(self.higgs_sample)));
 #        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone("rate_%s_for_unbin"%(self.vbfhiggs_sample)));
 
@@ -1992,7 +1760,7 @@ class doFit_wj_and_wlvj:
           getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_WW_EWK_signal_region%s_%s_mlvj"%(self.mlvj_shape["WW_EWK"],self.channel)).clone("WW_EWK_%s"%(self.channel)));         
 
         ### signal shape
-        getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
+        #getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
  #       getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone("qqH_%s"%(self.channel)))
 
         ##create "fake data" for the limit
@@ -2047,7 +1815,7 @@ class doFit_wj_and_wlvj:
         fix_Pdf(self.workspace4limit_.pdf("VV_%s"%(self.channel)),    RooArgSet(rrv_x));
         if options.jetBin == "_2jet": fix_Pdf(self.workspace4limit_.pdf("WW_EWK_%s"%(self.channel)),RooArgSet(rrv_x));         
         fix_Pdf(self.workspace4limit_.pdf("WJets_%s"%(self.channel)), RooArgSet(rrv_x)); 
-        fix_Pdf(self.workspace4limit_.pdf("RSGraviton_%s"%(self.channel)),   RooArgSet(rrv_x));
+        #Ivan comment:         fix_Pdf(self.workspace4limit_.pdf("Signal_%s"%(self.channel)),   RooArgSet(rrv_x));
  #       fix_Pdf(self.workspace4limit_.pdf("qqH_%s"%(self.channel)),   RooArgSet(rrv_x));
 
         ### print the workspace 4 limit 
@@ -2281,12 +2049,12 @@ class doFit_wj_and_wlvj:
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_1000);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_1000);
 
-        self.workspace4limit_.var("CMS_scale_j").setError(1);
-        self.workspace4limit_.var("CMS_res_j").setError(1);
+        #Ivan comment: self.workspace4limit_.var("CMS_scale_j").setError(1);
+        #Ivan comment: self.workspace4limit_.var("CMS_res_j").setError(1);
 #        self.workspace4limit_.var("intf_RSGraviton").setError(1);
 
-        params_list.append(self.workspace4limit_.var("CMS_scale_j"));
-        params_list.append(self.workspace4limit_.var("CMS_res_j"));
+        #Ivan comment: params_list.append(self.workspace4limit_.var("CMS_scale_j"));
+        #Ivan comment: params_list.append(self.workspace4limit_.var("CMS_res_j"));
  #       params_list.append(self.workspace4limit_.var("intf_RSGraviton"));
 
         ### print the datacard                                       
@@ -3141,7 +2909,7 @@ self.channel));
         print "############################# fit_VV ################################"
 
         ### Build the dataset        
-        self.get_mj_and_mlvj_dataset(self.file_VV_mc,"_VV","jet_mass_pr")# to get the shape of m_lvj
+        self.get_mj_and_mlvj_dataset(self.file_VV_mc,"_VV","jet_mass_pruned")# to get the shape of m_lvj
 
         if not options.skipJetSystematics:
          fit_mj_single_MC(self.workspace4fit_,self.file_VV_mc,"_VVmassvbf_jes_up",self.mj_shape["VV"],self.channel,self.wtagger_label,1,options.pseudodata);        
@@ -3196,7 +2964,7 @@ self.channel));
         print "############################# fit_WW_EWK ################################"
 
         ### Build the dataset        
-        self.get_mj_and_mlvj_dataset(self.file_WW_EWK_mc,"_WW_EWK","jet_mass_pr")# to get the shape of m_lvj
+        self.get_mj_and_mlvj_dataset(self.file_WW_EWK_mc,"_WW_EWK","jet_mass_pruned")# to get the shape of m_lvj
 
         if not options.skipJetSystematics:
          fit_mj_single_MC(self.workspace4fit_,self.file_WW_EWK_mc,"_WW_EWKmassvbf_jes_up",self.mj_shape["WW_EWK"],self.channel,self.wtagger_label,1,options.pseudodata);        
@@ -3405,11 +3173,12 @@ self.channel));
     def fit_AllSamples_Mj_and_Mlvj(self):
         print "################### fit_AllSamples_Mj_and_Mlvj #####################"
         self.fit_Signal();        
+        self.fit_TTbar();
         self.fit_STop();
         self.fit_VV();
         if options.jetBin == "_2jet": self.fit_WW_EWK();        
         self.fit_WJets();
-        self.fit_TTbar();
+        
 
         print "________________________________________________________________________"
                                                                     
@@ -3475,7 +3244,7 @@ self.channel));
 
       ### Fix the pdf of signal, TTbar, STop and VV in the signal region
       
-      fix_Model(self.workspace4fit_,"_%s"%(self.higgs_sample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
+      #Ivan comment the line: fix_Model(self.workspace4fit_,"_%s"%(self.higgs_sample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
 #      fix_Model(self.workspace4fit_,"_%s"%(self.vbfhiggs_sample),"_signal_region","_mlvj",self.mlvj_shape["vbfH"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_TTbar","_signal_region","_mlvj",self.mlvj_shape["TTbar"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_STop","_signal_region","_mlvj",self.mlvj_shape["STop"],self.channel,"",0);
@@ -3484,6 +3253,7 @@ self.channel));
       self.workspace4fit_.writeToFile(self.tmpFile.GetName());
 
       ### Call the evaluation of the normalization in the signal region for signal, TTbar, VV, STop, and WJets after the extrapolation via alpha
+      #Ivan comment the line: 
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.higgs_sample),self.mlvj_shape["RSGraviton"],"_signal_region",self.channel);
 #      get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.vbfhiggs_sample),self.mlvj_shape["vbfH"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_TTbar",self.mlvj_shape["TTbar"],"_signal_region",self.channel);
@@ -3491,12 +3261,11 @@ self.channel));
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_VV",self.mlvj_shape["VV"],"_signal_region",self.channel);
       if options.jetBin == "_2jet":
        get_mlvj_normalization_insignalregion(self.workspace4fit_,"_WW_EWK",self.mlvj_shape["WW_EWK"],"_signal_region",self.channel);
-    
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_WJets0",self.mlvj_shape["WJets0"],"_signal_region",self.channel,1);  
       self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-
+#     Ivan: these 2 line are not working for me right now:  
       self.prepare_limit("sideband_correction_method1",1);
-      self.read_workspace();
+      #self.read_workspace();
       
     ####### +++++++++++++++
     def analysis_sideband_correction_method1_without_shape_and_psmodel_systermatic(self):
@@ -3504,8 +3273,8 @@ self.channel));
         self.get_data();
         self.fit_WJetsNormalization_in_Mj_signal_region("_WJets0");
         self.fit_mlvj_in_Mj_sideband("_WJets0","_sb_lo", self.MODEL_4_mlvj,1);
-#        self.prepare_limit("sideband_correction_method1");
-#        self.read_workspace(1);
+        self.prepare_limit("sideband_correction_method1");
+        self.read_workspace(1);
 
 
 ### funtion to run the analysis without systematics
@@ -3518,7 +3287,7 @@ def pre_limit_sb_correction_without_systermatic( channel, higgs_sample="HWWMH600
 
 
 ### funtion to run the complete alpha analysis
-def pre_limit_sb_correction(method, channel, higgs_sample="HWWMH600", in_mlvj_signal_region_min=500, in_mlvj_signal_region_max=700, in_mj_min=30, in_mj_max=140, in_mlvj_min=400, in_mlvj_max=1400, fit_model="ErfExp_v1", fit_model_alter="ErfPow_v1"): # the WJets M_lvj shape and normalization are from sb_correction
+def pre_limit_sb_correction(method, channel, higgs_sample="Signal", in_mlvj_signal_region_min=500, in_mlvj_signal_region_max=700, in_mj_min=30, in_mj_max=140, in_mlvj_min=400, in_mlvj_max=1400, fit_model="ErfExp_v1", fit_model_alter="ErfPow_v1"): # the WJets M_lvj shape and normalization are from sb_correction
 
     print "#################### pre_limit_sb_correction: channel %s, signal %s, max and min signal region %f-%f, max and min mJ %f-%f, max and min mlvj %f-%f, fit model %s and alternate %s ######################"%(channel,higgs_sample,in_mlvj_signal_region_min,in_mlvj_signal_region_max,in_mj_min,in_mj_max,in_mlvj_min,in_mlvj_max,fit_model,fit_model_alter);
 

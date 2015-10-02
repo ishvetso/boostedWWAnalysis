@@ -97,18 +97,18 @@ parser.add_option('--plotLikelihoodScan',    action="store", type="int",    dest
 #############################################
 
 mass = [1000,2000,3000,4000]
-ccmlo = [700,700,700,700]
+ccmlo = 700
 #ccmhi = [1500,2500,3500,4500]
-ccmhi = [5000,5000,5000,5000]
-mjlo = [40,40,40,40]
-mjhi = [130,130,130,130]
+ccmhi = 5000
+mjlo = 40
+mjhi = 130
 #mjlo = [35,35,35,35]
 #mjhi = [110,110,110,110]
-mlo = [700,700,700,700]
+mlo = 700
 #mhi = [1500,2500,3500,4500]
-mhi = [4500,4500,4500,4500]
-shape = ["ExpN","ExpN","ExpN","ExpN"]
-shapeAlt = ["ExpTail","ExpTail","ExpTail","ExpTail"]
+mhi = 4500
+shape = "ExpN"
+shapeAlt = "ExpTail"
 #shape = ["Exp","Exp","Exp","Exp"]
 #shapeAlt = ["Pow","Pow","Pow","Pow"]
 
@@ -2723,27 +2723,27 @@ if __name__ == '__main__':
     
     if options.makeCards:
         if not os.path.isdir("log"): os.system("mkdir log" );
-        for i in range(mLo,mHi):
-            for j in range(cpLo,cpHi):
-                for k in range(brLo,brHi):
+        for j in range(cpLo,cpHi):
+            for k in range(brLo,brHi):
 
-                    print "--------------------------------------------------";                
-                    print "--------------------------------------------------";                
-                    print "R U N N I N G   F I T S" 
-                    print "mass = ",mass[i],", cprime = ",cprime[j],", brnew = ",BRnew[k],", channel: ",options.channel," pseudodata ",options.pseudodata
-                    print "--------------------------------------------------";                
-                    print "--------------------------------------------------";  
-                    
-                    time.sleep(0.3);
-                    
-                    command = "python doFit_class_run2exo.py %s RSGraviton%03d %02d %02d %02d %02d %02d %02d %s %s -b -s --cprime %01d --BRnew %01d --inPath %s/ --jetBin %s --channel %s --pseudodata %d --closuretest %d --skipJetSystematics %d --interferenceModel %s -f %s --category %s"%(CHAN, mass[i], ccmlo[i], ccmhi[i], mjlo[i], mjhi[i], mlo[i], mhi[i], shape[i], shapeAlt[i], cprime[j], BRnew[k], os.getcwd(), options.jetBin, options.channel,options.pseudodata,options.closuretest,options.skipJetSystematics,options.interferenceModel,options.treeFolder,options.category);
-                    print command ;
+                print "--------------------------------------------------";                
+                print "--------------------------------------------------";                
+                print "R U N N I N G   F I T S" 
+                print "cprime = ",cprime[j],", brnew = ",BRnew[k],", channel: ",options.channel," pseudodata ",options.pseudodata
+                print "--------------------------------------------------";                
+                print "--------------------------------------------------";  
+                
+                time.sleep(0.3);
+                
+                command = "python doFit_class_run2exo.py %s Signal %02d %02d %02d %02d %02d %02d %s %s -b -s --cprime %01d --BRnew %01d --inPath %s/ --jetBin %s --channel %s --pseudodata %d --closuretest %d --skipJetSystematics %d --interferenceModel %s -f %s --category %s"%(CHAN,  ccmlo, ccmhi, mjlo, mjhi, mlo, mhi, shape, shapeAlt, cprime[j], BRnew[k], os.getcwd(), options.jetBin, options.channel,options.pseudodata,options.closuretest,options.skipJetSystematics,options.interferenceModel,options.treeFolder,options.category);
+                print command ;
 
-                    if options.batchMode :
-                        fn = "fitScript_%s_%03d_%02d_%02d_%s"%(options.channel,mass[i],cprime[j],BRnew[k],shape[i]);
-                        submitBatchJob( command, fn );
-                    if not options.batchMode: 
-                        os.system(command);
+                if options.batchMode :
+                    fn = "fitScript_%s_%03d_%02d_%02d_%s"%(options.channel,mass[i],cprime[j],BRnew[k],shape[i]);
+                    submitBatchJob( command, fn );
+                if not options.batchMode: 
+                    os.system(command);
+
 
     #########################################
     # ===================================== #
