@@ -112,7 +112,7 @@ class doFit_wj_and_wlvj:
         self.tmpFile.cd();
         ### set the channel type --> electron or muon
         self.channel = in_channel;
-        self.higgs_sample = in_higgs_sample;
+        self.SignalSample = in_higgs_sample;
 
         if in_higgs_sample == "RSGraviton600":  self.vbfhiggs_sample = "vbfH600";
         if in_higgs_sample == "RSGraviton700":  self.vbfhiggs_sample = "vbfH700";
@@ -367,24 +367,24 @@ class doFit_wj_and_wlvj:
         self.rlt_DIR = "cards_%s_%s_%s/"%(self.channel,self.mlvj_shape["WJets0"],self.category);
 
         if options.jetBin == "_2jet" : 
-         self.file_rlt_txt                   = self.rlt_DIR+"other_hwwlvj_%s_%s%s_%02d_%02d.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_rlt_root                  = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_workspace.root"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_unbin_RSGravitonvbfH    = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_unbin_RSGraviton        = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_unbin_vbfH       = self.rlt_DIR+"hwwlvj_%s_%s%s_vbfH_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_counting_RSGravitonvbfH = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_counting_RSGraviton     = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
-         self.file_datacard_counting_vbfH    = self.rlt_DIR+"hwwlvj_%s_%s%s_vbfH_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_rlt_txt                   = self.rlt_DIR+"other_hwwlvj_%s_%s%s_%02d_%02d.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_rlt_root                  = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_workspace.root"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_unbin_RSGravitonvbfH    = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_unbin_RSGraviton        = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_unbin_vbfH       = self.rlt_DIR+"hwwlvj_%s_%s%s_vbfH_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_counting_RSGravitonvbfH = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_counting_RSGraviton     = self.rlt_DIR+"hwwlvj_%s_%s%s_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
+         self.file_datacard_counting_vbfH    = self.rlt_DIR+"hwwlvj_%s_%s%s_vbfH_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.jetBin,options.cprime,options.BRnew)
         else:
-         self.file_rlt_txt                   = self.rlt_DIR+"other_hwwlvj_%s_%s_%02d_%02d.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_rlt_root                  = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_workspace.root"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_unbin_RSGravitonvbfH    = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_unbin_RSGraviton        = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_unbin_vbfH       = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_counting_RSGravitonvbfH = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_counting_RSGraviton     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_unbin_Signal     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
-         self.file_datacard_counting_vbfH    = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_counting.txt"%(self.higgs_sample,self.channel,options.cprime,options.BRnew)
+         self.file_rlt_txt                   = self.rlt_DIR+"other_hwwlvj_%s_%s_%02d_%02d.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_rlt_root                  = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_workspace.root"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_unbin_RSGravitonvbfH    = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_unbin_RSGraviton        = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_unbin_vbfH       = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_counting_RSGravitonvbfH = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_counting_RSGraviton     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_unbin_Signal     = self.rlt_DIR+"hwwlvj_%s_%s_%02d_%02d_unbin.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
+         self.file_datacard_counting_vbfH    = self.rlt_DIR+"hwwlvj_%s_%s_vbfH_%02d_%02d_counting.txt"%(self.SignalSample,self.channel,options.cprime,options.BRnew)
             
         self.file_out = open(self.file_rlt_txt,"w");
         self.file_out.write("Welcome:\n");
@@ -459,35 +459,35 @@ class doFit_wj_and_wlvj:
         self.QCDscale_qqH_ACCEPT = 0.0;
 
         # from twiki https:#twiki.cern.ch/twiki/bin/view/LHCPhysics/CERNYellowReportPageAt8TeV,  
-        if self.higgs_sample == "RSGraviton600": 
+        if self.SignalSample == "RSGraviton600": 
             self.QCDscale_qqH         = 0.007 ;
             self.pdf_gg               = 0.091 ;
             self.pdf_qqbar            = 0.050 ;
             self.QCDscale_ggH_ACCEPT  = 0.036 ;
             self.QCDscale_qqH_ACCEPT  = 0.007 ;
 
-        elif self.higgs_sample == "RSGraviton700": 
+        elif self.SignalSample == "RSGraviton700": 
             self.QCDscale_qqH         = 0.008;
             self.pdf_gg               = 0.101;
             self.pdf_qqbar            = 0.042
             self.QCDscale_ggH_ACCEPT  = 0.038;
             self.QCDscale_qqH_ACCEPT  = 0.008
 
-        elif self.higgs_sample == "RSGraviton800": 
+        elif self.SignalSample == "RSGraviton800": 
             self.QCDscale_qqH        = 0.010;
             self.pdf_gg              = 0.106;
             self.pdf_qqbar           = 0.047;
             self.QCDscale_ggH_ACCEPT = 0.040;
             self.QCDscale_qqH_ACCEPT = 0.009
 
-        elif self.higgs_sample == "RSGraviton900": 
+        elif self.SignalSample == "RSGraviton900": 
             self.QCDscale_qqH        = 0.012
             self.pdf_gg              = 0.111;
             self.pdf_qqbar           = 0.053
             self.QCDscale_ggH_ACCEPT = 0.042;
             self.QCDscale_qqH_ACCEPT = 0.010
 
-        elif self.higgs_sample == "RSGraviton1000": 
+        elif self.SignalSample == "RSGraviton1000": 
             self.QCDscale_qqH        = 0.013;
             self.pdf_gg              = 0.121;
             self.pdf_qqbar           = 0.059; 
@@ -586,7 +586,7 @@ class doFit_wj_and_wlvj:
         self.shape_para_error_WJets0 = 2.0;
         self.shape_para_error_TTbar  = 2.0;
 
-        if self.higgs_sample == "RSGraviton600" or self.higgs_sample == "RSGraviton700":
+        if self.SignalSample == "RSGraviton600" or self.SignalSample == "RSGraviton700":
             self.shape_para_error_alpha = 2.0;
         else:
             self.shape_para_error_alpha = 2.0;
@@ -764,12 +764,12 @@ class doFit_wj_and_wlvj:
 
 
          #jet mass uncertainty on ggH normalization
-         rrv_ggH                  = self.workspace4fit_.var("rrv_number_dataset_signal_region_%s_%s_mj"%(self.higgs_sample,self.channel))
-         rrv_ggHmassvbf_jes_up    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.higgs_sample,self.channel))
-         rrv_ggHmassvbf_jes_dn    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_dn_%s_mj"%(self.higgs_sample,self.channel))
-         rrv_ggHmassvbf_jer       = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_%s_mj"%(self.higgs_sample,self.channel))
-         rrv_ggHmassvbf_jer_up    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_up_%s_mj"%(self.higgs_sample,self.channel))
-         rrv_ggHmassvbf_jer_dn    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_dn_%s_mj"%(self.higgs_sample,self.channel))
+         rrv_ggH                  = self.workspace4fit_.var("rrv_number_dataset_signal_region_%s_%s_mj"%(self.SignalSample,self.channel))
+         rrv_ggHmassvbf_jes_up    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.SignalSample,self.channel))
+         rrv_ggHmassvbf_jes_dn    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_dn_%s_mj"%(self.SignalSample,self.channel))
+         rrv_ggHmassvbf_jer       = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_%s_mj"%(self.SignalSample,self.channel))
+         rrv_ggHmassvbf_jer_up    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_up_%s_mj"%(self.SignalSample,self.channel))
+         rrv_ggHmassvbf_jer_dn    = self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_dn_%s_mj"%(self.SignalSample,self.channel))
 
          rrv_ggH.Print();
          rrv_ggHmassvbf_jes_up.Print();
@@ -779,7 +779,7 @@ class doFit_wj_and_wlvj:
          rrv_ggHmassvbf_jer_dn.Print();        
 
          #jet mass uncertainty on ggH normalization
-         if(self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.higgs_sample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.higgs_sample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_up_%s_mj"%(self.higgs_sample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_dn_%s_mj"%(self.higgs_sample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_%s_mj"%(self.higgs_sample,self.channel))):    
+         if(self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.SignalSample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_up_%s_mj"%(self.SignalSample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_up_%s_mj"%(self.SignalSample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jes_dn_%s_mj"%(self.SignalSample,self.channel)) and self.workspace4fit_.var("rrv_number_dataset_signal_region_%smassvbf_jer_%s_mj"%(self.SignalSample,self.channel))):    
 
             self.ggH_normalization_uncertainty_from_jet_scale = ((TMath.Abs(rrv_ggHmassvbf_jes_up.getVal()-rrv_ggH.getVal())+TMath.Abs(rrv_ggHmassvbf_jes_dn.getVal()-rrv_ggH.getVal() ) )/2.)/rrv_ggH.getVal();         
             print "Total Uncertainty on RSGraviton due to jes: uncertainty ",self.ggH_normalization_uncertainty_from_jet_scale;
@@ -1696,8 +1696,8 @@ class doFit_wj_and_wlvj:
         #################################################################################################################
         
         #Ivan: comment this block with for counting : 
-        print self.higgs_sample
-        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_%s_%s_mlvj"%(self.higgs_sample,self.channel)).clone("rate_%s_for_counting"%(self.higgs_sample) ) )
+        print self.SignalSample
+        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_%s_%s_mlvj"%(self.SignalSample,self.channel)).clone("rate_%s_for_counting"%(self.SignalSample) ) )
 #        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_%s_%s_mlvj"%(self.vbfhiggs_sample,self.channel)).clone("rate_%s_for_counting"%(self.vbfhiggs_sample)))
 
         getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_fitting_signal_region_WJets0_%s_mlvj"%(self.channel)).clone("rate_WJets_for_counting"))
@@ -1711,7 +1711,7 @@ class doFit_wj_and_wlvj:
         ################################################################################
         
         #Ivan comment the line: 
-        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("rate_%s_for_unbin"%(self.higgs_sample)));
+        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).clone("rate_%s_for_unbin"%(self.SignalSample)));
 #        getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone("rate_%s_for_unbin"%(self.vbfhiggs_sample)));
 
         getattr(self.workspace4limit_,"import")(self.workspace4fit_.var("rrv_number_WJets0_signal_region%s_%s_mlvj"%(self.mlvj_shape["WJets0"],self.channel)).clone("rate_WJets_for_unbin"));
@@ -1761,7 +1761,7 @@ class doFit_wj_and_wlvj:
           getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_WW_EWK_signal_region%s_%s_mlvj"%(self.mlvj_shape["WW_EWK"],self.channel)).clone("WW_EWK_%s"%(self.channel)));         
 
         ### signal shape
-        getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
+        getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).clone("RSGraviton_%s"%(self.channel)))
  #       getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone("qqH_%s"%(self.channel)))
 
         ##create "fake data" for the limit
@@ -1971,81 +1971,81 @@ class doFit_wj_and_wlvj:
           systematic = SystematicUncertaintyHiggs_01jetBin() ;
 
   
-        if TString(self.higgs_sample).Contains("600") :
+        if TString(self.SignalSample).Contains("600") :
 
-           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_600);
-           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_600);
-           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_600);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_600);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_600);
+           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_600);
                                                                                                                    
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_vbfH_600);
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_vbfH_600);
                                                                                                                                                                   
-           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_600);
-           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_600);
+           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_600);
+           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_600);
                                      
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_600);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_600);
 
-        elif TString(self.higgs_sample).Contains("700") :
+        elif TString(self.SignalSample).Contains("700") :
 
-           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_700);
-           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_700);
-           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_700);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_700);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_700);
+           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_700);
                                                                                                                    
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_vbfH_700);
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_vbfH_700);
                                                                                                                                                                   
 
-           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_700);
-           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_700);
+           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_700);
+           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_700);
                                      
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_700);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_700);
 
-        elif TString(self.higgs_sample).Contains("800") :
+        elif TString(self.SignalSample).Contains("800") :
 
-           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_800);
-           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_800);
-           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_800);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_800);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_800);
+           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_800);
                                                                                                                    
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_vbfH_800);
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_vbfH_800);
                                                                                                                                                                   
 
-           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_800);
-           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_800);
+           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_800);
+           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_800);
                                      
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_800);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_800);
 
-        elif TString(self.higgs_sample).Contains("900") :
+        elif TString(self.SignalSample).Contains("900") :
 
-           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_900);
-           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_900);
-           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_900);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_900);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_900);
+           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_900);
                                                                                                                    
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_vbfH_900);
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_vbfH_900);
                                                                                                                                                                   
 
-           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_900);
-           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_900);
+           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_900);
+           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_900);
                                      
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_900);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_900);
 
-        elif TString(self.higgs_sample).Contains("1000") :
+        elif TString(self.SignalSample).Contains("1000") :
 
-           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_1000);
-           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_1000);
-#           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_1000);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_ggH_1000);
+           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_ggH_1000);
+#           self.workspace4limit_.var("rrv_mean_shift_scale_interference_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.mean_signal_uncertainty_interference_ggH_1000);
                                                                                                                    
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_scale_vbfH_1000);
 #           self.workspace4limit_.var("rrv_mean_shift_scale_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.mean_signal_uncertainty_jet_res_vbfH_1000);
                                                                                                                                                                   
 
-           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_1000);
-           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_1000);
+           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_ggH_1000);
+           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_ggH_1000);
                                      
 #           self.workspace4limit_.var("rrv_sigma_shift_jes_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_scale_vbfH_1000);
 #           self.workspace4limit_.var("rrv_sigma_shift_jer_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).setVal(systematic.sigma_signal_uncertainty_jet_res_vbfH_1000);
@@ -2226,7 +2226,7 @@ class doFit_wj_and_wlvj:
 
          if mode == "unbin":
           fnOnly = ntpath.basename(self.file_rlt_root)
-          getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.higgs_sample,self.mlvj_shape["RSGraviton"],self.channel)).clone(self.higgs_sample+"_%s"%(self.channel)))
+          getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.SignalSample,self.mlvj_shape["RSGraviton"],self.channel)).clone(self.SignalSample+"_%s"%(self.channel)))
 #          getattr(self.workspace4limit_,"import")(self.workspace4fit_.pdf("model_pdf_%s_signal_region%s_%s_mlvj"%(self.vbfhiggs_sample,self.mlvj_shape["vbfH"],self.channel)).clone(self.vbfhiggs_sample+"_%s"%(self.channel)))
 
           if signalchannel == "RSGraviton":
@@ -2255,10 +2255,10 @@ self.channel));
              datacard_out.write( "\nprocess            -1          1        2        3       4       5  " );
 
              if mode == "unbin":
-                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f     %0.2f "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_unbin").getVal()));
+                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f     %0.2f "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_unbin").getVal()));
 
              elif mode == "counting":
-                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f    %0.2f "%(self.workspace4limit_.var("rate_%s_for_counting"%(self.higgs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_counting").getVal()));
+                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f    %0.2f "%(self.workspace4limit_.var("rate_%s_for_counting"%(self.SignalSample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_counting").getVal()));
                 
              datacard_out.write( "\n-------------------------------- " );
 
@@ -2285,10 +2285,10 @@ self.channel));
              datacard_out.write( "\nprocess            -1          1        2        3         4    ");
 
              if mode == "unbin":
-                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal()));
+                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal()));
 
              elif mode == "counting":
-                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f"  %(self.workspace4limit_.var("rate_%s_for_counting"%(self.higgs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal()));
+                datacard_out.write( "\nrate          %0.2f          %0.2f   %0.2f    %0.2f    %0.2f"  %(self.workspace4limit_.var("rate_%s_for_counting"%(self.SignalSample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal()));
                 
              datacard_out.write( "\n-------------------------------- " ); 
 
@@ -2371,10 +2371,10 @@ self.channel));
              datacard_out.write( "\nprocess            -1         0           1          2       3         4     5       ");
 
              if mode == "unbin":
-                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f    %0.2f "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_%s_for_unbin"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_unbin").getVal()))
+                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f    %0.2f "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_%s_for_unbin"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_unbin").getVal()))
 
              elif mode == "counting":
-                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f    %0.2f"%(self.workspace4limit_.var("rate_%s_for_counting"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_%s_for_counting"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_counting").getVal()  ) )
+                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f    %0.2f"%(self.workspace4limit_.var("rate_%s_for_counting"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_%s_for_counting"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal(), self.workspace4limit_.var("rate_WW_EWK_for_counting").getVal()  ) )
 
 
              datacard_out.write( "\n-------------------------------- " );
@@ -2410,10 +2410,10 @@ self.channel));
              datacard_out.write( "\nprocess            -1        0          1        2        3      4    ");
 
              if mode == "unbin":
-                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_%s_for_unbin"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal()));
+                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_unbin"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_%s_for_unbin"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_unbin").getVal(), self.workspace4limit_.var("rate_TTbar_for_unbin").getVal(), self.workspace4limit_.var("rate_STop_for_unbin").getVal(), self.workspace4limit_.var("rate_VV_for_unbin").getVal()));
 
              elif mode == "counting":
-                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_counting"%(self.higgs_sample)).getVal(),self.workspace4limit_.var("rate_%s_for_counting"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal()));
+                datacard_out.write( "\nrate               %0.2f    %0.2f         %0.2f   %0.2f    %0.2f    %0.2f  "%(self.workspace4limit_.var("rate_%s_for_counting"%(self.SignalSample)).getVal(),self.workspace4limit_.var("rate_%s_for_counting"%(self.vbfhiggs_sample)).getVal(), self.workspace4limit_.var("rate_WJets_for_counting").getVal(), self.workspace4limit_.var("rate_TTbar_for_counting").getVal(), self.workspace4limit_.var("rate_STop_for_counting").getVal(), self.workspace4limit_.var("rate_VV_for_counting").getVal()));
 
 
              datacard_out.write( "\n-------------------------------- " );
@@ -2605,7 +2605,7 @@ self.channel));
         
         if options.jetBin == "_2jet": model_pdf_WW_EWK.Print();
 
-        rrv_number_ggH = workspace.var("rate_%s_for_unbin"%(self.higgs_sample));
+        rrv_number_ggH = workspace.var("rate_%s_for_unbin"%(self.SignalSample));
 #        rrv_number_vbfH = workspace.var("rate_%s_for_unbin"%(self.vbfhiggs_sample));
         rrv_number_WJets = workspace.var("rate_WJets_for_unbin");
         rrv_number_VV = workspace.var("rate_VV_for_unbin");
@@ -2710,38 +2710,38 @@ self.channel));
          model_Total_background_MC.plotOn(mplot,RooFit.Normalization(scale_number_Total_background_MC),RooFit.Name("STop_line_invisible"), RooFit.Components("STop_%s"%(self.channel)), RooFit.LineColor(kBlack), RooFit.LineWidth(2), RooFit.VLines());
 
 
-        if self.higgs_sample == "RSGraviton600" or self.higgs_sample == "RSGraviton700":
+        if self.SignalSample == "RSGraviton600" or self.SignalSample == "RSGraviton700":
            signal_scale = 5;
         else: 
            signal_scale = 5;
         
-        if self.higgs_sample == "RSGraviton600":
+        if self.SignalSample == "RSGraviton600":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=0.6TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 #            model_pdf_vbfH.plotOn(mplot,RooFit.Normalization(scale_number_vbfH*signal_scale),RooFit.Name("qqH#times%s, m_{H}=0.6TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["vbfH"]), RooFit.LineStyle( 9), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton700":
+        if self.SignalSample=="RSGraviton700":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=0.7TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 #            model_pdf_vbfH.plotOn(mplot,RooFit.Normalization(scale_number_vbfH*signal_scale),RooFit.Name("qqH#times%s, m_{H}=0.7TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["vbfH"]), RooFit.LineStyle( 9), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton800":
+        if self.SignalSample=="RSGraviton800":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=0.8TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 #            model_pdf_vbfH.plotOn(mplot,RooFit.Normalization(scale_number_vbfH*signal_scale),RooFit.Name("qqH#times%s, m_{H}=0.8TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["vbfH"]), RooFit.LineStyle( 9), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton900":
+        if self.SignalSample=="RSGraviton900":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=0.9TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 #            model_pdf_vbfH.plotOn(mplot,RooFit.Normalization(scale_number_vbfH*signal_scale),RooFit.Name("qqH#times%s, m_{H}=0.9TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["vbfH"]), RooFit.LineStyle( 9), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton1000":
+        if self.SignalSample=="RSGraviton1000":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=1TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 #            model_pdf_vbfH.plotOn(mplot,RooFit.Normalization(scale_number_vbfH*signal_scale),RooFit.Name("qqH#times%s, m_{H}=1TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["vbfH"]), RooFit.LineStyle( 9), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton2000":
+        if self.SignalSample=="RSGraviton2000":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=1TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton3000":
+        if self.SignalSample=="RSGraviton3000":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=1TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 
-        if self.higgs_sample=="RSGraviton4000":
+        if self.SignalSample=="RSGraviton4000":
             model_pdf_ggH.plotOn(mplot,RooFit.Normalization(scale_number_ggH*signal_scale),RooFit.Name("RSGraviton#times%s, m_{H}=1TeV"%(signal_scale)),RooFit.DrawOption("L"), RooFit.LineColor(self.color_palet["RSGraviton"]), RooFit.LineStyle(2), RooFit.VLines());
 
         GetDataPoissonInterval(data_obs,rrv_x,mplot,self.narrow_factor);
@@ -2793,28 +2793,28 @@ self.channel));
     def fit_Signal(self):
         print "############# fit_Signal #################"
         ### Build the dataset
-        self.get_mj_and_mlvj_dataset(self.file_ggH,"_%s"%(self.higgs_sample));
+        self.get_mj_and_mlvj_dataset(self.file_ggH,"_%s"%(self.SignalSample));
 
         if not options.skipJetSystematics:
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jes_up"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jes_up"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
 
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
          self.workspace4fit_.Print();
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jes_dn"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jes_dn"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer_up"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer_up"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer_dn"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_int_up"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
-         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
-         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_int_dn"%(self.higgs_sample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));      
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_jer_dn"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
          self.workspace4fit_.writeToFile(self.tmpFile.GetName());
 
-        fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%s"%(self.higgs_sample),"_signal_region",self.mlvj_shape["RSGraviton"],self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.higgs_sample));
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_int_up"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
+         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
+         fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%smassvbf_int_dn"%(self.SignalSample),"_signal_region","CB_v1",self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));      
+         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
+
+        fit_mlvj_model_single_MC(self.workspace4fit_,self.file_ggH,"_%s"%(self.SignalSample),"_signal_region",self.mlvj_shape["RSGraviton"],self.channel,self.wtagger_label,0,0,0,0,"_%s"%(self.SignalSample));
         self.workspace4fit_.writeToFile(self.tmpFile.GetName());
             
         print "________________________________________________________________________"
@@ -3226,7 +3226,7 @@ self.channel));
       ### Fix the pdf of signal, TTbar, STop and VV in the signal region
       
       #Ivan comment the line: 
-      fix_Model(self.workspace4fit_,"_%s"%(self.higgs_sample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
+      fix_Model(self.workspace4fit_,"_%s"%(self.SignalSample),"_signal_region","_mlvj",self.mlvj_shape["RSGraviton"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_TTbar","_signal_region","_mlvj",self.mlvj_shape["TTbar"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_STop","_signal_region","_mlvj",self.mlvj_shape["STop"],self.channel,"",0);
       fix_Model(self.workspace4fit_,"_VV","_signal_region","_mlvj",self.mlvj_shape["VV"],self.channel,"",0);
@@ -3234,7 +3234,7 @@ self.channel));
       self.workspace4fit_.writeToFile(self.tmpFile.GetName());
 
       ### Call the evaluation of the normalization in the signal region for signal, TTbar, VV, STop, and WJets after the extrapolation via alpha
-      get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.higgs_sample),self.mlvj_shape["RSGraviton"],"_signal_region",self.channel);
+      get_mlvj_normalization_insignalregion(self.workspace4fit_,"_%s"%(self.SignalSample),self.mlvj_shape["RSGraviton"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_TTbar",self.mlvj_shape["TTbar"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_STop",self.mlvj_shape["STop"],"_signal_region",self.channel);
       get_mlvj_normalization_insignalregion(self.workspace4fit_,"_VV",self.mlvj_shape["VV"],"_signal_region",self.channel);
